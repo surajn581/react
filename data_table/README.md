@@ -59,6 +59,9 @@ We configure vite to route all the calls to _/api_ to _host.docker.internal_
 ```
 
 ```javascript
-//DataTable.jsx
+//WorkerHeartbeatsTable.jsx
 fetch("/api") //we use /api to fetch the data
+
+//WorkPublisherQueueTable.jsx
+fetch("/api/workpublisher") //we use /api/workpublisher to fetch the data
 ```

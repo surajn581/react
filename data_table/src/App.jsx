@@ -1,10 +1,12 @@
 import './App.css';
-import DataTable from './components/DataTable';
+import WorkerHeartbeatsTable from './components/WorkerHeartbeatsTable';
+import WorkPublisherQueueTable from './components/WorkPublisherQueueTable';
 
 function App() {
   return (
     <div className="App">
-      <DataTable />
+      <WorkerHeartbeatsTable />
+      <WorkPublisherQueueTable />
     </div>
   );
 }

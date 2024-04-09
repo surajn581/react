@@ -10,7 +10,7 @@ const WorkerHeartbeatsTable = () => {
   ]
 
   return (
-    <DataTable name='Worker Hearbeats' route='/api' columns={columns} />
+    <DataTable name='Worker Hearbeats' route='/api' columns={columns} refreshInterval={1}/>
   )
 }
 

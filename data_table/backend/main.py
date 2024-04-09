@@ -12,8 +12,8 @@ def read_root():
     now = datetime.now().timestamp()
     for worker, hearbeat in get_hearbeats().items():
         data.append( { 'id': str(worker, encoding='utf-8'),
-                       'heartbeat': datetime.fromtimestamp(float(hearbeat)).strftime('%Y-%m-%d:%H:%M:%S.%f'),
-                       'stale_by': now - float(hearbeat) } )
+                       'heartbeat': datetime.fromtimestamp(float(hearbeat)).strftime('%Y-%m-%d:%H:%M:%S'),
+                       'stale_by': max( now - float(hearbeat), 0 ) } )
     data = sorted(data, key = lambda row: row['heartbeat'], reverse=True)
     return data
 

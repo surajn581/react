@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const columns = [
   { field: 'id', headerName: 'Worker Name', width: 200 },
@@ -9,35 +11,23 @@ const columns = [
 
 const WorkerHeartbeatsTable = () => {
 
-  const [tableData, setTableData] = useState([])
+  const [rows, setRows] = useState([]);
 
-  const [rows, setRows] = useState(tableData);
-  const [deletedRows, setDeletedRows] = useState([]);
+  const handleUpdateAllRows = () => {
+    fetch("/api").then((data)=>data.json()).then((data)=>setRows(data))
+  };
 
-  useEffect(() => {
-    fetch("/api")
-      .then((data) => data.json())
-      .then((data) => setTableData(data))
-
-  }, [])
-
-  console.log(tableData);
+  console.log(rows);
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <h3>Worker Heartbeats</h3>
-      <DataGrid
-        rows={tableData}
-        columns={columns}
-        pageSize={12}
-        // checkboxSelection
-        onSelectionModelChange={({ selectionModel }) => {
-          const rowIds = selectionModel.map(rowId => parseInt(String(rowId), 10));
-          const rowsToDelete = tableData.filter(row => rowIds.includes(row.id));
-          setDeletedRows(rowsToDelete);
-          console.log(deletedRows);
-        }}
-      />
+        <Stack direction="row" spacing={1}>
+          <Button size="small" onClick={handleUpdateAllRows}>
+            fetch heartbeats
+          </Button>
+        </Stack>
+        <DataGrid rows={rows} columns={columns}/>
     </div>
   )
 }

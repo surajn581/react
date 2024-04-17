@@ -19,14 +19,41 @@ useEffect(() => {
   }, []);
 
 return (
-<div style={{ width: '100%' }}>
-    <h3>{name} || size: {rows.length}</h3>
-    <Stack direction="row" spacing={1}>
-        <Button size="small" onClick={handleUpdateAllRows}>
-        refresh
-        </Button>
-    </Stack>
-    <DataGrid rows={rows} columns={columns}/>
+<div style={{ width: 'fit-content', height: Math.min( 108*rows.length, 400) + 105, overflow:'hidden'}}>
+    <div style={{height:45, paddingLeft: '15px', paddingRight: '15px'}} >
+        <Stack direction="row" spacing={1}>
+            <Button size="small" onClick={handleUpdateAllRows}>
+                refresh
+            </Button>
+            <div style={{textAlign:'center', width:'50%', margin:'0 auto'}}>
+                <p style={{font:"'Segoe UI'"}} >{name} </p>
+            </div>            
+            <div style={{right:'0px', position:'relative'}}>
+                <p>size: {rows.length}</p>
+            </div>
+        </Stack>
+    </div>
+    <div style={{ height: Math.min( 108*rows.length, 400), width: 'fit-content', overflow: 'auto', alignContent:'end' }}>
+        <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSizeOptions={[15, 15, 125]}
+            initialState={{
+                            pagination: {
+                            paginationModel: { pageSize: 15 },
+                            },
+                        }}
+            sx={{
+                    fontFamily: '"Segoe UI"',
+                    boxShadow: 0.5,
+                    border: 1,
+                    borderColor: 'black',
+                    '& .MuiDataGrid-row:hover': { color: 'blue' },
+                    '& .MuiDataGrid-columnHeader': { backgroundColor:'#f0f0f0' },   
+                }}
+            
+        />
+    </div>
 </div>
 )
 }

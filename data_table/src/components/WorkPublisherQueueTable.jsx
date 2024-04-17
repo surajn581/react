@@ -10,7 +10,7 @@ const WorkPublisherQueueTable = () => {
   ]
 
   return (
-    <DataTable name='Work Items' route='/api/workpublisher' columns={columns} refreshInterval={15}/>
+    <DataTable name='Work Items' route='/api/workpublisher' columns={columns} refreshInterval={5}/>
   )
 }
 
